@@ -1,0 +1,13 @@
+.information {
+  background: rgb(51, 51, 51);
+  position: fixed;
+  bottom: 150px;
+  color: white;
+  width: 320px;
+  height: 120px;
+  border-radius: 6px;
+}
+
+.informationText {
+  margin-top: 12px;
+}
