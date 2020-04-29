@@ -22,6 +22,9 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setSearchResult(data.pop());
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, [inputText]);
 
@@ -33,6 +36,9 @@ function App() {
       .then((data) => {
         setTotalDeaths(data.Global.TotalDeaths);
         setTotalConfirmed(data.Global.TotalConfirmed);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   });
 
