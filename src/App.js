@@ -12,7 +12,8 @@ function App() {
   const [totalConfirmed, setTotalConfirmed] = React.useState("");
 
   React.useEffect(() => {
-    const url = `https://api.covid19api.com/live/country/${inputText}/status/confirmed`;
+    // const url = `https://api.covid19api.com/live/country/${inputText}/status/confirmed`;
+    const url = `https://api.covid19api.com/summary`;
 
     if (!inputText) {
       return;
@@ -21,7 +22,10 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setSearchResult(data.pop());
+        const country = data.Countries.find(
+          ({ Country }) => Country === inputText
+        );
+        setSearchResult(country);
       })
       .catch((err) => {
         console.log(err);
@@ -50,10 +54,9 @@ function App() {
         <CoronaCard
           key={searchResult}
           Country={searchResult.Country}
-          Deaths={searchResult.Deaths}
-          ConfirmedCases={searchResult.Confirmed}
-          ActiveCases={searchResult.Active}
-          RecoveredCases={searchResult.Recovered}
+          Deaths={searchResult.TotalDeaths}
+          ConfirmedCases={searchResult.TotalConfirmed}
+          RecoveredCases={searchResult.TotalRecovered}
         />
       )}
       <Information TotalDeaths={totalDeaths} TotalConfirmed={totalConfirmed} />
