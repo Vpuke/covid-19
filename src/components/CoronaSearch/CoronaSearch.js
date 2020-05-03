@@ -9,7 +9,6 @@ const CoronaSearch = (props) => {
         onChange={props.handleChange}
         placeholder="Search by Country"
       ></input>
-      <button className="SearchCoronaButton">Search</button>
     </div>
   );
 };

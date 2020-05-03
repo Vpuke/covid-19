@@ -4,12 +4,15 @@ import CoronaSearch from "./components/CoronaSearch/CoronaSearch";
 import CoronaCard from "./components/CoronaCard/CoronaCard";
 import CoronaTitle from "./components/CoronaTitle/CoronaTitle";
 import Information from "./components/Information/Information";
+import _ from "lodash";
 
 function App() {
   const [searchResult, setSearchResult] = React.useState("");
   const [inputText, setInputText] = React.useState("");
   const [totalDeaths, setTotalDeaths] = React.useState("");
   const [totalConfirmed, setTotalConfirmed] = React.useState("");
+  const delayedQuery = React.useRef(_.debounce((q) => setInputText(q), 500))
+    .current;
 
   React.useEffect(() => {
     // const url = `https://api.covid19api.com/live/country/${inputText}/status/confirmed`;
@@ -46,10 +49,14 @@ function App() {
       });
   });
 
+  const onChange = (e) => {
+    delayedQuery(e.target.value);
+  };
+
   return (
     <div className="App">
       <CoronaTitle>Covid-19</CoronaTitle>
-      <CoronaSearch handleChange={(e) => setInputText(e.target.value)} />
+      <CoronaSearch handleChange={onChange} />
       {searchResult && (
         <CoronaCard
           key={searchResult}
