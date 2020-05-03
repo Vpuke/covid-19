@@ -15,7 +15,6 @@ function App() {
     .current;
 
   React.useEffect(() => {
-    // const url = `https://api.covid19api.com/live/country/${inputText}/status/confirmed`;
     const url = `https://api.covid19api.com/summary`;
 
     if (!inputText) {
